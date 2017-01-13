@@ -26,7 +26,7 @@ Change minimum and maximum lenghts
 <?php
     // OPTION 1
     // When initializing generator object
-    $generator = new NameGenerator(1, 100); // Will randomly create names which's between 1 and 100 chars
+    $generator = new NameGenerator(1, 100); // Will create random names which's between 1 and 100 chars
 
     // OPTION 2
     // When generator already's been initialized
