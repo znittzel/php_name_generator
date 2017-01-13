@@ -1,5 +1,5 @@
 # PhpNameGenerator
-A small random name generator. Generates name based on givin minimum and maximum lenghts. These are not "real" names, just randomly selected characters creating a word. Perfect when creating a name for an application.
+A small random name generator. Generates names based on givin minimum and maximum lenghts. These are not "real" names, just randomly selected characters creating a word. Perfect when creating a name for an application.
 
 ```php
 <?php
@@ -17,5 +17,19 @@ A small random name generator. Generates name based on givin minimum and maximum
     // Iterate through the array of names
     foreach ($names as $name)
         echo $name->getString().'<br/>';
+?>
+```
+
+Change minimum and maximum lenghts
+
+```php
+<?php
+    // OPTION 1
+    // When initializing generator object
+    $generator = new NameGenerator(1, 100); // Will randomly create names which's between 1 and 100 chars
+
+    // OPTION 2
+    // When generator already's been initialized
+    $generator->setLenght(1, 100);
 ?>
 ```
