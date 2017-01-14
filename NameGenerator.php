@@ -28,9 +28,13 @@ class NameGenerator {
 	private $_vowels, $_consonants, $_minLenght, $_maxLenght, $_numOfVowels, $_numOfConsonants;
 
 	public function __construct($min = 2, $max = 10) {
+
+		// Throws if not ok
+		$this->checkLenghts($min, $max);
+
 		// Standard values
-		$this->_minLenght = 2;
-		$this->_maxLenght = 10;
+		$this->_minLenght = $min;
+		$this->_maxLenght = $max;
 		$this->_vowels = [
 			new Letter("A", 1), 
 			new Letter("E", 1), 
@@ -66,25 +70,33 @@ class NameGenerator {
 		$this->_numOfConsonants = count($this->_consonants);
 	}
 
+
+	private function checkLenghts($min, $max) {
+		if (!($min >= $this->_roules["minLenght"] && 
+			$min < $this->_roules["maxLenght"] &&
+			$max <= $this->_roules["maxLenght"] &&
+			$max > $this->_roules["minLenght"])) {
+
+			throw new Exception("Min and max lenghts has to be between ".$_roules['minLenght']." and ".$_roules["maxLenght"], 1);
+		}
+
+		if ($min > $max) {
+			throw new Exception("Min cannot be larger than max", 1);
+		}
+	}
+
 	/**
 	 * Sets the min and max lenght of the randomized generated names.
 	 */
 	public function setLenght($min, $max) {
-		$result = true;
+		
+		// Throws if not ok
+		$this->checkLenghts($min, $max);
 
-		if ($min >= $this->_allowedLenghts["minLenght"] && 
-			$min < $this->_allowedLenghts["maxLenght"] &&
-			$max <= $this->_allowedLenghts["maxLenght"] &&
-			$max > $this->_allowedLenghts["minLenght"]) {
-			
-			// If is in bound of allowed lenghts, ok
-			$this->_minLenght = $min;
-			$this->_maxLenght = $max;
-		} else {
-			$result = false;
-		}
-
-		return $result;
+		// If is in bound of allowed lenghts, ok
+		$this->_minLenght = $min;
+		$this->_maxLenght = $max;
+	
 	}
 
 	/**
@@ -93,13 +105,13 @@ class NameGenerator {
 	public function generateName() {
 		$name = new Name();
 
-		$randomLenght = rand($this->_minLenght+1, $this->_maxLenght);
-		for ($i = $this->_minLenght; $i <= $randomLenght; $i++) {
+		$randomLenght = rand($this->_minLenght, $this->_maxLenght);
+		for ($i = 0; $i <= $randomLenght; $i++) {
 			$consonant = $this->_consonants[rand(0, $this->_numOfConsonants-1)];
 			$vowel = $this->_vowels[rand(0, $this->_numOfVowels-1)];
 
 			// Only the first time
-			if ($i == $this->_minLenght) {
+			if ($i == 0) {
 				// Start with vowel or consonant
 				if (rand(0,1) == 1)
 					$name->append($vowel);
