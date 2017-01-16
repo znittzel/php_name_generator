@@ -1,7 +1,7 @@
 <?php 
 	include 'NameGenerator.php';
 
-	$generator = new NameGenerator(2, 3);
+	$generator = new NameGenerator(3, 5);
 	$names = $generator->generateNames(100);
 
 	foreach ($names as $name)

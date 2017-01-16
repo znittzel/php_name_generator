@@ -73,11 +73,11 @@ class NameGenerator {
 
 	private function checkLenghts($min, $max) {
 		if (!($min >= $this->_roules["minLenght"] && 
-			$min < $this->_roules["maxLenght"] &&
+			$min <= $this->_roules["maxLenght"] &&
 			$max <= $this->_roules["maxLenght"] &&
-			$max > $this->_roules["minLenght"])) {
+			$max >= $this->_roules["minLenght"])) {
 
-			throw new Exception("Min and max lenghts has to be between ".$_roules['minLenght']." and ".$_roules["maxLenght"], 1);
+			throw new Exception("Min and max lenghts has to be between ".$this->_roules['minLenght']." and ".$this->_roules["maxLenght"], 1);
 		}
 
 		if ($min > $max) {
@@ -106,7 +106,7 @@ class NameGenerator {
 		$name = new Name();
 
 		$randomLenght = rand($this->_minLenght, $this->_maxLenght);
-		for ($i = 0; $i <= $randomLenght; $i++) {
+		for ($i = 0; $i < $randomLenght; $i++) {
 			$consonant = $this->_consonants[rand(0, $this->_numOfConsonants-1)];
 			$vowel = $this->_vowels[rand(0, $this->_numOfVowels-1)];
 
